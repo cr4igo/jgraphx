@@ -3,17 +3,7 @@
  */
 package com.mxgraph.swing;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Stroke;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
@@ -55,15 +45,7 @@ import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxGraphModel.Filter;
 import com.mxgraph.model.mxIGraphModel;
-import com.mxgraph.swing.handler.mxCellHandler;
-import com.mxgraph.swing.handler.mxConnectionHandler;
-import com.mxgraph.swing.handler.mxEdgeHandler;
-import com.mxgraph.swing.handler.mxElbowEdgeHandler;
-import com.mxgraph.swing.handler.mxGraphHandler;
-import com.mxgraph.swing.handler.mxGraphTransferHandler;
-import com.mxgraph.swing.handler.mxPanningHandler;
-import com.mxgraph.swing.handler.mxSelectionCellsHandler;
-import com.mxgraph.swing.handler.mxVertexHandler;
+import com.mxgraph.swing.handler.*;
 import com.mxgraph.swing.util.mxCellOverlay;
 import com.mxgraph.swing.util.mxICellOverlay;
 import com.mxgraph.swing.view.mxCellEditor;
@@ -850,7 +832,14 @@ public class mxGraphComponent extends JScrollPane implements Printable
 	 */
 	protected mxGraphHandler createGraphHandler()
 	{
-		return new mxGraphHandler(this);
+		if (GraphicsEnvironment.isHeadless()) {
+			// non gui mode
+			return new mxGraphHeadlessHandler(this);
+		} else {
+			// gui mode
+			return new mxGraphHandler(this);
+		}
+
 	}
 
 	/**
