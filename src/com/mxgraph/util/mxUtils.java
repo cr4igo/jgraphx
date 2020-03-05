@@ -1675,7 +1675,7 @@ public class mxUtils
 				: Font.PLAIN;
 		
 		//https://github.com/elonderin/jgraphx/commit/c1c9b0ca7dee2b1e7ace0b0e88c3c06135bf236c
-		Map<TextAttribute, Object> fontAttributes = new HashMap<>();
+		Map<TextAttribute, Object> fontAttributes = new HashMap();
 		
 	    if ((fontStyle & mxConstants.FONT_UNDERLINE) == mxConstants.FONT_UNDERLINE)
 	    {
